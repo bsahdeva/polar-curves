@@ -20,11 +20,15 @@ def plot_polar_curve(polar_func, color=bb.RED, t_range=[0, 2 * bb.PI]):
     return polar_curve
 
 
-def curve_tracing_vector(
-    polar_func, theta: float, tip_length=0.15, tip_width=0.15, arc_radius=0.5
+def polar_ray(
+    magnitude: float, theta: float, tip_length=0.15, tip_width=0.15, arc_radius=0.5
 ):
 
-    fn = functools.partial(parametric_func, polar_func=polar_func)
+    def magnitude_circle(theta):
+        r = magnitude
+        return r
+
+    fn = functools.partial(parametric_func, polar_func=magnitude_circle)
 
     vector = bb.Line(start=bb.ORIGIN, end=fn(theta)).add_tip(
         tip_length=tip_length, tip_width=tip_width
